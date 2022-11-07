@@ -69,9 +69,9 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Deploy App Service'
             inputs:
-              azureSubscription: 'Inform-your-subscription'
+              azureSubscription: 'Azure subscription 1(43d82ba2-041c-4da5-9154-1220e18e1b31)'
               appType: 'webAppLinux'
-              appName: 'angularwithazure'
+              appName: 'Mynewangular'
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
               runtimeStack: 'NODE|16-lts'
 
@@ -83,17 +83,3 @@ stages:
       displayName: 'DeployAcceptance'
       steps:
       - script: echo Deploying to Acceptance
-- stage: Production
-  dependsOn: [ Acceptance ]
-  displayName: 'Deploy to Production'
-  jobs:
-    - deployment: DeployProduction
-      pool:
-        vmImage: 'ubuntu-latest'
-      environment: Production
-      strategy:
-        runOnce:
-          deploy:
-            steps:
-            - script: echo Deploying to Production
-     
